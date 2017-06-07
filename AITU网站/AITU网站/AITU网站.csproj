@@ -232,11 +232,45 @@
     <Content Include="App_Data\MyDb_log.ldf">
       <DependentUpon>MyDb.mdf</DependentUpon>
     </Content>
+    <Content Include="common\images\03ca341e723a6eb62809b1dcd634a610.png" />
+    <Content Include="common\images\04926b7a2ee45587c122a23d1f574257.jpg" />
+    <Content Include="common\images\05eb177140c50dda1b472d8afd229d25.png" />
+    <Content Include="common\images\0c1611c8203d94ec22ce360f348ad658.jpg" />
+    <Content Include="common\images\1310733ffcf5ddd5344d2d24ae59a98c.png" />
+    <Content Include="common\images\229c1766fb58511e2378b74b7be6c5f2.jpg" />
+    <Content Include="common\images\279ec0e7a20e15cbd06891184e414772.png" />
+    <Content Include="common\images\35461532c887711d7b7705b8882204a4.png" />
+    <Content Include="common\images\364c48e001b4108327dc8bec002aaaec.jpg" />
     <Content Include="common\images\3e673936c347db8cde8bbcd8dbe77753.png" />
+    <Content Include="common\images\47549a94debdd4ce549c99f585c6378b.png" />
     <Content Include="common\images\4d5a0cd30b4781ff300419d8113e097e.png" />
+    <Content Include="common\images\56e66aa3e4b3d.png" />
+    <Content Include="common\images\572004bed4ed8.png" />
+    <Content Include="common\images\572fdcdd1a3f1.png" />
+    <Content Include="common\images\5deae814c2dd976b72e01b261fcd06ca.jpg" />
+    <Content Include="common\images\5e4e945a7e432287a6e5aed44051545e.png" />
+    <Content Include="common\images\6877b6ede2ebf221aca84bd9fc6c00e7.jpg" />
+    <Content Include="common\images\687df1b4223e1836670903aec57a74e3.jpg" />
+    <Content Include="common\images\74f6c624924fc5aca722c5a7215d006b.png" />
+    <Content Include="common\images\79190064e830b8afb711701071b0ff9e.png" />
+    <Content Include="common\images\7cac30126c08611fad2ac27fffb120a2.png" />
+    <Content Include="common\images\8773abc4648648217b8929d25a1653d9.png" />
+    <Content Include="common\images\8ac7302f006e9dd06866f79acb026ded.png" />
+    <Content Include="common\images\9534ce566048b781f29aebe8850d0dae.png" />
     <Content Include="common\images\9b7704da7a9fe62ab3d006245af7f74a.png" />
+    <Content Include="common\images\a1d278707c01804ff4551d5403c81e92.jpg" />
+    <Content Include="common\images\ab6fffb64f018bfca65e396c5be1080d.jpg" />
+    <Content Include="common\images\afc4e994ea09255fa685dcbfa6c9d7f4.jpg" />
     <Content Include="common\images\b136a3750c69b3eeb058a8f82882d86c.jpg" />
+    <Content Include="common\images\b73efe1506125049132432aea254f159 %281%29.jpg" />
+    <Content Include="common\images\b80b221c4e9161fa86d41e1b91709a6c.png" />
+    <Content Include="common\images\b94abbd6f4771e29bb19758a5328e26a.png" />
+    <Content Include="common\images\ba33903956330d7cf5603f8a458699a2.jpg" />
+    <Content Include="common\images\c22f0cccd4fb7e122f4dc9bf3522457c.jpg" />
     <Content Include="common\images\de78328243b8c2ba5b4ba802a5a12c9e.png" />
+    <Content Include="common\images\e4dd1645216a334140c4e97fdad0313c.jpg" />
+    <Content Include="common\images\ea585e3a681430da4a96b59daaf7148d.png" />
+    <Content Include="common\images\f2de90c95a5396b1e30b0a3792b498cd.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -353,6 +387,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Home\Main.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
