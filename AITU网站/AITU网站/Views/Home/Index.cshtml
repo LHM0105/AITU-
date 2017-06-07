@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "起始页";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .box{
+        height:500px;
+        padding-top:100px;
+        padding-bottom:100px;
+    }
+    .footer{
+        height:100px;
+        background-color:darkslategrey;
+        margin-bottom:0;
+    }
+    .img{
+        width:150px;
+        height:150px;
+        transition:1s;
+    }
+    .img:hover{
+        width:150px;
+        height:150px;
+        transform:rotate(360deg);
+    }
+</style>
+<div class="box row">
+    <div class="col-md-6 text-center center-block">
+            <div class="img">
+                <img src="~/common/images/de78328243b8c2ba5b4ba802a5a12c9e.png" style="width:100%" alt="随便看看" />
+            </div>
+            <a href="链接到主页">
+                <span class="text-primary">随便看看</span>
+            </a>
+        
+    </div>
+    <div class="col-md-6">
+        <div class="center-block">
+            <div class="img">
+                <img src="~/common/images/4d5a0cd30b4781ff300419d8113e097e.png" style="width:100%" alt="登陆/注册" />
+            </div>
+            <a href="链接到登陆注册">
+                <span class="text-primary">
+                    登陆/注册
+                </span>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <div class="center-block">
+        <a href="关于我们">
+            关于我们
+        </a>
+    </div>
+    
+</div>
