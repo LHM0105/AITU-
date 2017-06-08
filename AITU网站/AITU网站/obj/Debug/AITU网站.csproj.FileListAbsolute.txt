@@ -289,3 +289,4 @@ E:\常用文件\AITU-\AITU网站\AITU网站\bin\zh-Hans\Microsoft.AspNet.Identit
 E:\常用文件\AITU-\AITU网站\AITU网站\bin\zh-Hans\Microsoft.AspNet.Identity.EntityFramework.resources.dll
 E:\常用文件\AITU-\AITU网站\AITU网站\obj\Debug\AITU网站.dll
 E:\常用文件\AITU-\AITU网站\AITU网站\obj\Debug\AITU网站.pdb
+E:\常用文件\AITU-\AITU网站\AITU网站\obj\Debug\AITU网站.csprojResolveAssemblyReference.cache

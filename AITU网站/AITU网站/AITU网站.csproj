@@ -388,6 +388,8 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Main.cshtml" />
+    <Content Include="Views\Home\MainIndex.cshtml" />
+    <Content Include="Views\Shared\_MainLayout.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
