@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "个人主页";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{ 
+    AjaxOptions opt1 = new AjaxOptions
+    {
+        UpdateTargetId = "panel-div",
+        OnFailure = "ShoeError('更新出错了')"
+    };
+}
+<style>
+    .head{
+        height:50px;
+        padding-top:15px;
+        padding-left:60px;
+        padding-right:60px;
+        background-color:teal;
+        border:dotted 1px blue;
+    }
+    .a1 {
+        font-size: 20px;
+        color: rosybrown;
+    }
+
+        .a1:hover {
+            color: indianred;
+        }
+    .a2{
+        font-size:16px;
+        color:white;
+    }
+    .a2:hover{
+        color:aliceblue;
+        font-size:18px;
+    }
+</style>
+<div class="head">
+    <span class="a2">用户ID+修改密码</span>
+    <span class="pull-right">@Html.ActionLink("返回主页", "MainIndex", "Home", new { @class = "a2" })</span>
+</div>
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-md-4 text-center">
+                @Ajax.ActionLink("我的收藏", "控制器中的方法", "控制器名", opt1, new { @class = "a1" })
+            </div>
+            <div class="col-md-4 text-center">
+                @Ajax.ActionLink("我的下载", "控制器中的方法", "控制器名", opt1, new { @class = "a1" })
+            </div>
+            <div class="col-md-4 text-center">
+                @Ajax.ActionLink("我的上传", "upload", "Home", opt1, new { @class = "a1" })
+            </div>
+        </div>
+    </div>
+    <div id="panel-div" class="panel-body">
+        一开始显示我收藏的图片
+    </div>
+</div>
+
+<script>
+    function ShowError(errorInfo) {
+        alert(errorInfo);
+    }
+</script>

@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "主页面";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+<style>
+    .img-box {
+        border: solid 0.5px lightgrey;
+        padding: 10px;
+        margin: 10px;
+        position: relative;
+    }
+
+    .img-name {
+        background-color: white;
+        height: 50px;
+        text-align: center;
+        color: gray;
+        font-size: 18px;
+        padding-top: 16px;
+    }
+
+    .collect {
+        background-color: white;
+        height: 50px;
+        width: 50%;
+        padding-top: 16px;
+        text-align: center;
+        color: gray;
+        font-size: 18px;
+        position: absolute;
+        bottom: 0px;
+        left: 0;
+    }
+
+    .download {
+        background-color: white;
+        height: 50px;
+        padding-top: 16px;
+        width: 50%;
+        text-align: center;
+        color: gray;
+        font-size: 18px;
+        position: absolute;
+        bottom: 0px;
+        right: 0;
+    }
+</style>
+<div class="row">
+    <div class="col-md-4">
+        <div class="img-box">
+            <img src="~/common/images/03ca341e723a6eb62809b1dcd634a610.png" style="width:100%" />
+            <div class="img-name">图片名称（1224*1600）</div>
+            <hr />
+            <div class="collect">收藏</div>
+            <div class="download">下载</div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="img-box">
+            <img src="~/common/images/0c1611c8203d94ec22ce360f348ad658.jpg" style="width:100%" />
+
+            <div class="img-name">图片名称（1224*1600）</div>
+            <hr />
+            <div class="collect">收藏</div>
+            <div class="download">下载</div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="img-box">
+            <img src="~/common/images/35461532c887711d7b7705b8882204a4.png" style="width:100%" />
+
+            <div class="img-name">图片名称（1224*1600）</div>
+            <hr />
+            <div class="collect">收藏</div>
+            <div class="download">下载</div>
+        </div>
+    </div>
+</div>
+
+
