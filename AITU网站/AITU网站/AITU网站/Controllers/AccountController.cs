@@ -93,6 +93,7 @@ namespace AITU网站.Controllers
                             select t;
                 if (query.Count() > 0)
                 {
+                    Session["userId"] = model.UserId;
                     Session["status"] = "1";
                     //ViewBag.text ="1";
                     return RedirectToAction("MainIndex", "Home");

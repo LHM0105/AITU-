@@ -386,6 +386,10 @@
     <Content Include="Views\Shared\_MainLayout.cshtml" />
     <Content Include="Views\Home\My.cshtml" />
     <Content Include="Views\Home\upload.cshtml" />
+    <Content Include="Views\Home\myUpload.cshtml" />
+    <Content Include="Views\Shared\_LayoutMypage.cshtml" />
+    <Content Include="Views\Home\myDownload.cshtml" />
+    <Content Include="Views\Home\myCollection.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
