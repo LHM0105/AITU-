@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+
+   @* 为了能在视图以及分部视图中都能调用布局页引用的脚本，需要将这
+    些引用放到head块内，而不是放到body块的末尾。*@
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+
+    @*Ajax帮助器是利用jQuery的Ajax来实现的，所以需要添加下面的引用*@
+    @Scripts.Render("~/bundles/jquery/unobtrusive-ajax")
+    @*输入验证需要添加下面的引用（也可以用到时再在相应页面中添加）*@
+    @Scripts.Render("~/bundles/jquery/validate")
+    @*将下面的引用放在最后，是为了确保在调用Bootstrap之前先调用jQuery*@
+    @Scripts.Render("~/bundles/bootstrap")
+    <style>
+        .a1 {
+            font-size: 20px;
+            color: rosybrown;
+        }
+
+            .a1:hover {
+                color: indianred;
+            }
+    </style>
+</head>
+@{
+    AjaxOptions opt = new AjaxOptions
+    {
+        UpdateTargetId = "panelbody",
+        OnFailure = "ShoeError('更新出错了')"
+    };
+}
+<body>
+    <div class="container">
+        <img src="~/common/images/229c1766fb58511e2378b74b7be6c5f2.jpg" style="width:100%;height:200px;" />
+    </div>
+    <div class="container">
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        @Ajax.ActionLink("背景元素", "控制器中的方法", "控制器名", opt, new { @class = "a1" })
+                    </div>
+                    <div class="col-md-4 text-center">
+                        @Ajax.ActionLink("图标元素", "控制器中的方法", "控制器名", opt, new { @class = "a1" })
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <!--用户登录前viewbag.text=0显示“登录 注册”，登录后显示“我的”，点击转到个人中心，显示“我的收藏、我的下载”-->
+                        
+                        @if (@ViewBag.text =="1")
+                        {
+                            @Html.ActionLink("我的", "My", "Home", new {id="My", @class = "a1" })
+                          
+                        }
+                        else
+                        {
+                            @Html.ActionLink("登录 ", "Login", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "a1" })
+                            @Html.ActionLink("注册", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "a1" })
+                            
+                        }
+
+                    </div>
+                </div>
+            </div>
+            <div id="panelbody" class="panel-body">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>
+<script>
+    function ShowError(errorInfo) {
+        alert(errorInfo);
+    }
+</script>

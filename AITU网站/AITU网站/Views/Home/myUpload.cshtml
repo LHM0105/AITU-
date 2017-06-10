@@ -1,0 +1,223 @@
+﻿
+<style>
+    .img-box {
+        border: solid 0.5px lightgrey;
+        padding: 10px;
+        margin: 10px;
+        position: relative;
+    }
+
+    .img-name {
+        background-color: white;
+        height: 50px;
+        text-align: center;
+        color: gray;
+        font-size: 18px;
+        padding-top: 16px;
+    }
+
+    .collect {
+        background-color: white;
+        height: 50px;
+        width: 50%;
+        padding-top: 16px;
+        text-align: center;
+        color: gray;
+        font-size: 18px;
+        position: absolute;
+        bottom: 0px;
+        left: 0;
+    }
+
+    .download {
+        background-color: white;
+        height: 50px;
+        padding-top: 16px;
+        width: 50%;
+        text-align: center;
+        color: gray;
+        font-size: 18px;
+        position: absolute;
+        bottom: 0px;
+        right: 0;
+    }
+    .line {
+        margin-left: 30px;
+        position: relative;
+        height: 35px;
+        line-height: 35px;
+    }
+    .line label{
+        font-size: 15px;
+        display: inline-block;
+    }
+    .text{
+        display: inline-block;
+        vertical-align: middle;
+        padding-right: 14px;
+        padding-left: 14px;
+        width: 350px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        height: 35px;
+        line-height: 35px;
+        font-size: 15px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .browse_btn{
+        margin-left: 5px;
+        display: inline-block;
+        vertical-align: middle;
+        width: 60px;
+        text-align: center;
+        height: 35px;
+        border-radius: 3px;
+        line-height: 35px;
+        font-size: 15px;
+        background-color: tomato;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+    }
+    #selector {
+        display: inline-block; 
+        height: 35px;
+        width: 150px;
+    }
+</style>
+<!--上传图片按钮-->
+<button class="btn btn-info" data-toggle="modal" data-target="#modalDialog1">
+    上传图片
+</button>
+<!--上传图片模式对话框-->
+<div id="modalDialog1" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">图片上传</h4>
+            </div>
+            <div class="modal-body">
+                <div class="line">
+                    <label for="line">文件：</label>
+                    <input type="text" id="img_path" class="text" />
+                    <input type="button" value="浏览..." class="browse_btn" onclick="browse()" />
+                    <input type="file" id="uploadfile" style="display:none" onchange="uploadInput()" />
+                </div><br />
+                <div class="line">
+                    <label for="line">命名：</label>
+                    <input name="imgName" type="text" class="text" />
+                </div><br />
+                <div class="line">
+                    <label for="line">类别：</label>
+                    <select class="form-control" id="selector">
+                        <option value="1" selected = "selected">背景元素</option>
+                        <option value="2">图标元素</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="uploads()">上传</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">放弃</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--从数据库获取用户上传的图片-->
+<div class="row">
+    <div class="col-md-4">
+        <div class="img-box">
+            <img src="~/common/images/03ca341e723a6eb62809b1dcd634a610.png" style="width:100%" />
+            <div class="img-name">图片名称（1224*1600）</div>
+            <hr />
+            <div class="collect">收藏</div>
+            <div class="download">下载</div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="img-box">
+            <img src="~/common/images/0c1611c8203d94ec22ce360f348ad658.jpg" style="width:100%" />
+
+            <div class="img-name">图片名称（1224*1600）</div>
+            <hr />
+            <div class="collect">收藏</div>
+            <div class="download">下载</div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="img-box">
+            <img src="~/common/images/35461532c887711d7b7705b8882204a4.png" style="width:100%" />
+
+            <div class="img-name">图片名称（1224*1600）</div>
+            <hr />
+            <div class="collect">收藏</div>
+            <div class="download">下载</div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function browse() { 
+        var upload_input = $("#uploadfile");
+        upload_input.click();
+    }
+    function uploadInput() {
+        path = $("#uploadfile").val();
+        $("#img_path").val(path);
+    }
+    function uploads() {
+        var imgName = $("input[name='imgName']").val();
+        var imgType = $("#selector").val();
+        $("input[name='imgName']").val("");
+        $("#img_path").val("");
+        if (path == "" || imgName == "") {
+            alert("请完善信息!");
+        } else {
+            $.ajax({
+                url: '/Home/Uploads',
+                type: "POST",
+                data: {
+                    path: path,
+                    imgName: imgName,
+                    imgType: imgType
+                },
+                success: function (data) {
+                    alert(data);
+                },
+                error: function () {
+                    alert("系统错误，上传失败！");
+                }
+            });
+        }
+    }
+</script>
+<!--
+    <script type="text/javascript">
+    function mc() { var _i = $("#uploadfile"); _i.click(); }
+    function mm() {
+        path = $("#uploadfile").val();
+        $("#puf").val(path);
+    }
+    function uploads() {
+        $.ajax({
+            url: '/Home/Uploads',
+            type: "POST",
+            data: 'path='+path ,
+            success: function (data) {
+                alert(data);
+            },
+            error: function () {
+                alert("出错了！");
+            }
+        });
+    }
+</script>
+-->
+
+
+
