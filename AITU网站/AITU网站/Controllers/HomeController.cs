@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -39,22 +40,32 @@ namespace AITU网站.Controllers
         //上传图片
         public ActionResult Uploads(string path, string imgName, int imgType)
         {
+            //根据路径获取图片并将其转化为二进制流
             FileStream fs = new FileStream(path, FileMode.Open);//可以是其他重载方法 
             byte[] byData = new byte[fs.Length];
             fs.Read(byData, 0, byData.Length);
+           /* BinaryReader br = new BinaryReader(fs);
+            byte[] byData = br.ReadBytes((int)fs.Length);  //将流读入到字节数组中*/
 
+            //获取图片的像素宽和像素高
+            System.Drawing.Image tempimage = System.Drawing.Image.FromStream(fs, true);
+            var width = tempimage.Width;
+            var height = tempimage.Height;
+
+            //获取当前时间戳
             TimeSpan ts = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0);
             
+            //将图片存入数据库
             using (var context = new MyDb())
             {
-                var image = new Image();
+                var image = new Models.Image();
                 image.ImgId = Convert.ToInt64(ts.TotalMilliseconds).ToString();
                 image.ImgType = imgType;
                 image.ImgName = imgName;
                 image.ImgContent = byData;
                 image.UserId = (string)Session["userId"];
-                image.ImgWidth = 123;
-                image.ImgHight = 456;
+                image.ImgWidth = width;
+                image.ImgHight = height;
                 context.Image.Add(image);
 
                 try
@@ -142,11 +153,12 @@ namespace AITU网站.Controllers
         
         public ActionResult MainIndex()
         {
-            var id = "1497017030753";
+            var id = "1497072994559";
             using (var context = new MyDb())
             {
-                var list = new List<Image>();
-                Image image = new Image();
+               // var list = new List<Image>();
+                //byte[] imagebytes = null;
+              //  Image image = new Image();
                 var query = from t in context.Image
                             where t.ImgId == id
                             select t;
@@ -154,10 +166,15 @@ namespace AITU网站.Controllers
                 {
                     foreach (var item in query)
                     {
-                        System.IO.MemoryStream ms = new System.IO.MemoryStream(item.ImgContent);
-                        System.Drawing.Image img = System.Drawing.Image.FromStream(ms);
-                        ViewBag.img = img;
-                        Session["img"] = img;
+                      //  imagebytes = (byte[])item.ImgContent.GetValue(18);
+                        MemoryStream ms = new MemoryStream(item.ImgContent);
+                        Bitmap bmpt = new Bitmap(ms);
+                       /* System.IO.MemoryStream ms = new System.IO.MemoryStream(item.ImgContent);
+                        System.Drawing.Image img = System.Drawing.Image.FromStream(ms);*/
+                      //  ViewBag.img = img;
+                       // Session["img"] = img;
+                         ViewBag.img = bmpt;
+                         Session["img"] = bmpt;
                     }
                 }
                         /*  var query = from t in context.Image
