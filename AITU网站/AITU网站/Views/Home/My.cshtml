@@ -2,6 +2,20 @@
     ViewBag.Title = "个人主页";
     Layout = "~/Views/Shared/_LayoutMypage.cshtml";
 }
-<h3>嗨，（用户名）,目前为止你在 AITU收藏了图片？张</h3>
-<h3>嗨，（用户名）,目前为止你在 AITU上传了图片？张</h3>
-<h3>嗨，（用户名）,目前为止你在 AITU下载了图片？张</h3>
+<style>
+    .num{
+        color:cornflowerblue;
+    }
+</style>
+<div class="container">
+    <div class="box text-center">
+        <h2>嗨，
+            <span class="num">@ViewBag.userId</span>
+        </h2>
+            
+        <h3>
+           可以查看你收藏和上传的图片哦#^_^#
+        </h3>
+    </div>
+    
+</div>

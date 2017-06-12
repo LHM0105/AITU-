@@ -55,6 +55,7 @@
             }
 
         .a2 {
+            margin-left:10px;
             font-size: 16px;
             color: white;
         }
@@ -79,7 +80,7 @@
                 @ViewBag.userId
             </span>
             <!--修改密码按钮及弹出模式对话框-->
-            <button class="btn btn-info" data-toggle="modal" data-target="#modalDialog">
+            <button class="btn btn-warning" data-toggle="modal" data-target="#modalDialog">
                 修改密码
             </button>
             <div id="modalDialog" class="modal fade">
@@ -115,20 +116,17 @@
                     </div>
                 </div>
             </div>
-
+            <span class="pull-right">@Html.ActionLink("注销", "Login", "Account", routeValues: null, htmlAttributes: new { @class = "a2", id = "loginLink" })</span>
             <span class="pull-right">@Html.ActionLink("返回主页", "MainIndex", "Home", new { @class = "a2" })</span>
         </div>
 
         <div class="panel panel-success">
             <div class="panel-heading">
                 <div class="row">
-                    <div class="col-md-4 text-center">
+                    <div class="col-md-6 text-center">
                         @Ajax.ActionLink("我的收藏", "myCollection", "Home", opt1, new { @class = "a1" })
                     </div>
-                    <div class="col-md-4 text-center">
-                        @Ajax.ActionLink("我的下载", "myDownload", "Home", opt1, new { @class = "a1" })
-                    </div>
-                    <div class="col-md-4 text-center">
+                    <div class="col-md-6 text-center">
                         @Ajax.ActionLink("我的上传", "myUpload", "Home", opt1, new { @class = "a1" })
                     </div>
                 </div>

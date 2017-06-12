@@ -10,8 +10,8 @@ namespace AITU网站.Models
     public partial class Collection
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int CollectId { get; set; }
+        [StringLength(13)]
+        public string CollectId { get; set; }
 
         [Required]
         [StringLength(11)]

@@ -3,93 +3,152 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 <style>
-    .img-box {
-        border: solid 0.5px lightgrey;
-        padding: 10px;
-        margin: 10px;
-        position: relative;
-    }
-
-    .img-name {
-        height: 50px;
-        text-align: center;
-        color: gray;
-        font-size: 18px;
-        padding-top: 16px;
-    }
-
-    .collect {
-        height: 50px;
-        width: 50%;
-        margin-left: 20%;
-        padding-top: 16px;
-        text-align: center;
-        color: gray;
-        font-size: 18px;
-    }
-
-    .download {
-        height: 50px;
-        padding-top: 16px;
-        margin-left: 30%;
-        width: 50%;
-        text-align: center;
-        color: gray;
-        font-size: 18px;
+    img {
+        width: 100%;
     }
 </style>
 <script>
-    document.ready(function () {
-        alert("ready");
+    //加载页面时获取所有图片信息
+    function ready() {
+        $.ajax({
+            url: '/Home/GetImgInfo',
+            type: "POST",
+            success: function (data) {
+                imgData = data;
+                showImg();
+                console.log(data);
+            },
+            error: function () {
+                alert("系统错误！");
+            }
+        });
+    }
+    ready();
 
-    });
-    window.onload = function () {
-        alert('onload');
+    //显示图片
+    function showImg() {
+        //计算每列需显示的图片数量
+        var yu = imgData.length % 3;
+        var average = parseInt(imgData.length / 3);
+        if (yu == 0) {
+            one = two = average;
+        } else if (yu == 1) {
+            one = average + 1;
+            two = average;
+        } else  {
+            one = two = average + 1;
+        }
 
-    };
+        //循环输出图片
+        for (i = 0; i < imgData.length; i++) {
+            //创建imgBox并设置id
+            var box = document.createElement("div");
+            box.id = "img-box" + i;
+            //box.name = "img-box" + i;
+
+            //将图片分别填充至三列中
+            if (i < one) {
+                $(".col-1").append(box);
+            } else if (i >= one && i < (one+two)) {
+                $(".col-2").append(box);
+            } else if (i >= (one+two) && i < imgData.length) {
+                $(".col-3").append(box);
+            }
+
+            //创建img节点并设置id
+            var image = document.createElement("img");
+            image.id = 'img' + i;
+
+            //向box中添加图片
+            $("#img-box" + i).append(image);
+           // $("div[name='img-box'" + i + "]").append(image);
+
+            //向box中添加图片名字
+            var name = document.createElement("div");
+            name.innerHTML = imgData[i].ImgName + "(" + imgData[i].ImgWidth + "*" + imgData[i].ImgHight + ")";
+            name.style = "text-align:center; font-size:15px; color:#777777; margin-top:8px;";
+            $("#img-box" + i).append(name);
+
+            //向box中添加分隔线
+            var hr = document.createElement("hr");
+            hr.style = "border-color:#CCCCCC; margin-top:8px; margin-bottom:8px;";
+            $("#img-box" + i).append(hr);
+
+            //将图片的ImgId保存起来以便之后使用
+            var imgId = imgData[i].ImgId;
+
+            //向box中添加图片操作
+            var collect = document.createElement("a");        //添加“收藏”
+            collect.name = "opt";
+            collect.innerHTML = "收藏 " + imgData[i].CollectNum;
+            collect.onclick = (function (imgId) { return function () { collection(imgId); } })(imgId);
+            collect.style = "display:inline; text-decoration:none; margin-left:13%; font-size:15px; color:#777777;";
+            $("#img-box" + i).append(collect);
+
+            var down = document.createElement("a");        //添加“下载”
+            down.name = "opt";
+            down.innerHTML = "下载 " + imgData[i].DownNum;
+            down.style = "display:inline; text-decoration:none; margin-left:45%; font-size:15px; color:#777777;";
+            $("#img-box" + i).append(down);
+
+            //为img标签的src赋值
+            imgsrc = '@Url.Action("GetImg", "Home")' + "?id=" + imgData[i].ImgId;
+            $("#img" + i).attr("src", imgsrc);
+
+            //为box设置样式
+            document.getElementById("img-box" + i).style = "border-style: solid; border-width: 1px;background-color:#FEFEFE; border-color:#C0BCBC; padding:10px; margin:20px auto;";
+        }
+        $("img").attr("alt", "正在拼命加载！稍等一下下……");
+
+        //设置“收藏”和“下载”字样的鼠标进入效果
+        $("a[name='opt']").mouseenter(function () {
+            $(this).css({
+                color: 'red',
+                fontSize: '17px'
+            });
+        });
+        //设置“收藏”和“下载”字样的鼠标移出效果
+        $("a[name='opt']").mouseout(function () {
+            $(this).css({
+                color: '#777777',
+                fontSize: '15px'
+            });
+        });
+    }
+
+    //点击收藏后与后台交互操作
+    function collection(id) {
+        var userId = $("#userId").val();
+        //若该用户未登录，提示用户先进行登录
+        if (userId == "") {
+            alert("请先登录!");
+        }else {
+            $.ajax({
+                url: '/Home/Collection',
+                type: "POST",
+                data: {
+                    imgId: id,
+                    userId: userId
+                },
+                success: function (data) {
+                    alert(data);
+                    //若收藏成功则重新加载页面，刷新收藏量
+                    if (data == "收藏成功！") {
+                        window.location.reload();
+                    }
+                },
+                error: function () {
+                    alert("系统出现错误！");
+                }
+            });
+        }
+    }
 </script>
-<div class="row">
-    <div class="col-md-4">
-        <div class="img-box">
-            <img src="~/common/images/03ca341e723a6eb62809b1dcd634a610.png" style="width:100%" />
-            <div class="img-name">图片名称（1224*1600）</div>
-            <hr />
-            <div class="bottom">
-                <span class="collect">收藏</span>
-                <span class="download">下载</span>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="col-md-4">
-        <div>
-            @ViewBag.img
-    </div>
-    <div> @Session["img"]</div>
-    <div class="img-box">
-        <img src="~/common/images/0c1611c8203d94ec22ce360f348ad658.jpg" style="width:100%" />
-
-        <div class="img-name">图片名称（1224*1600）</div>
-        <hr />
-        <div class="bottom">
-            <span class="collect">收藏</span>
-            <span class="download">下载</span>
-        </div>
-    </div>
+<div style="background-color:#F3F3F3;" class="row">
+    <!--此input标签无意义，只为由此获取ViewBag.userId的值-->
+    <input id="userId" style="display:none;" value=@ViewBag.userId>
+    <!--图片显示分为三列，按列进行显示-->
+    <div class="col-md-4 col-1"></div>
+    <div class="col-md-4 col-2"></div>
+    <div class="col-md-4 col-3"></div>
 </div>
-<div class="col-md-4">
-    <div class="img-box">
-        <img src="~/common/images/35461532c887711d7b7705b8882204a4.png" style="width:100%" />
-
-        <div class="img-name">图片名称（1224*1600）</div>
-        <hr />
-        <div class="bottom">
-            <span class="collect">收藏</span>
-            <span class="download">下载</span>
-        </div>
-    </div>
-</div>
-</div>
-
-

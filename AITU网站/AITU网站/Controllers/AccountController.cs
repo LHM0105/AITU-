@@ -85,7 +85,7 @@ namespace AITU网站.Controllers
             // 这不会计入到为执行帐户锁定而统计的登录失败次数中
             // 若要在多次输入错误密码的情况下触发帐户锁定，请更改为 shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.UserId, model.Password, model.RememberMe, shouldLockout: false);
-            using (var context = new MyDb())
+            using (var context = new MyDb2())
             {
                 
                 var query = from t in context.User
@@ -181,7 +181,7 @@ namespace AITU网站.Controllers
             if (ModelState.IsValid)
             {
                 
-                using (var context = new MyDb())
+                using (var context = new MyDb2())
                 {
                     var user = new User();
                     user.Email = model.Email;
